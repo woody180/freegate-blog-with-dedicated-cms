@@ -35,7 +35,7 @@
         </div>
     </footer>
 
-    <script type="module" src="js/bootstrap.js"></script>
+    <script type="module" src="<?= base_url("js/bootstrap.js") ?>"></script>
     
     <?= $this->renderSection('javascript_footer') ?>
 
