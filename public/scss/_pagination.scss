@@ -1,0 +1,30 @@
+.uk-pagination {
+    li {
+        position: relative;
+        a {
+            position: relative;
+            width: 20px;
+            height: 30px;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 5px;
+            font-size: 13px;
+            background-color: #f1eef3;
+            transition: all .3s ease;
+            
+            &:hover {
+                background-color: $primaryColor;
+                color: white;
+            }
+        }
+        
+        &.uk-active {
+            a {
+                background-color: $primaryColor;
+                color: white;
+            }
+        }
+    }
+}
