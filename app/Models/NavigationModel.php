@@ -3,22 +3,20 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use Faker\Generator;
-use Faker\Provider\Image;
 
-class ArticleModel extends Model
+class NavigationModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'article';
-    protected $primaryKey       = 'article_id';
+    protected $table            = 'navigation';
+    protected $primaryKey       = 'nav_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['article_title', 'article_url', 'article_thumbnail', 'article_description', 'article_body', 'created_at', 'updated_at'];
+    protected $allowedFields    = [];
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -40,19 +38,4 @@ class ArticleModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-    
-    
-    
-    public function fake(Generator &$faker)
-    {
-        $title = $faker->words(rand(2,5), true);
-        $url = url_title(strtolower($title));
-        return [    
-            'article_title' => $title,
-            'article_url' => $url,
-            'article_thumbnail' => 'https://picsum.photos/id/'.rand(55, 400).'/550/350',
-            'article_description' => $faker->text(50),
-            'article_body' => $faker->paragraphs(5, true)
-        ];
-    }
 }

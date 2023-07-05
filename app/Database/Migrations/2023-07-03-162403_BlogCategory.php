@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
 class BlogCategory extends Migration
 {
@@ -55,6 +56,14 @@ class BlogCategory extends Migration
                 'constraint' => 255,
 				'null' => true
             ],
+            'created_at' => [
+                'type' => 'DATETIME',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
+            'updated_at' => [
+                'type' => 'DATETIME',
+                'default' => new RawSql('CURRENT_TIMESTAMP')
+            ]
         ]);
         
         

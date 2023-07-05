@@ -3,6 +3,7 @@
 namespace Config;
 
 use App\Controllers\Home;
+use \App\Controllers\BlogController;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -34,7 +35,12 @@ $routes->setAutoRoute(false);
 $routes->get('/', [\App\Controllers\Home::class, 'index']);
 
 
-
+$routes->group('blog', function($routes) 
+{
+    $routes->get('/', [BlogController::class, 'blog']);
+    $routes->get('(:segment)', [BlogController::class, 'category/$1']);
+    $routes->get('(:segment)/(:segment)', [BlogController::class, 'article/$1/$2']);
+});
 
 
 

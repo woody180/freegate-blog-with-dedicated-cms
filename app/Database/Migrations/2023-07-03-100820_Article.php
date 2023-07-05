@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
 class Article extends Migration
 {
@@ -68,6 +69,14 @@ class Article extends Migration
                 'type' => 'INT',
 				'constraint' => 1,
 				'default' => 1
+            ],
+            'created_at' => [
+                'type' => 'DATETIME',
+                'default' => new RawSql('CURRENT_TIMESTAMP')
+            ],
+            'updated_at' => [
+                'type' => 'DATETIME',
+                'default' => new RawSql('CURRENT_TIMESTAMP')
             ]
         ]);
         
