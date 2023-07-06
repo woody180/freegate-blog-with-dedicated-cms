@@ -5,19 +5,25 @@ namespace App\Database\Seeds;
 use CodeIgniter\Database\Seeder;
 use App\Models\ArticleModel;
 use App\Models\BlogCategoryModel;
+use App\Models\ArticleBlogCategoryModel;
 use CodeIgniter\Test\Fabricator;
 
 class Installer extends Seeder
 {
     public function run()
     {
-        // Remove all data before insert again
-        $modelCats = new BlogCategoryModel();
-        $modelCats->purgeDeleted();
+        $this->db->disableForeignKeyChecks();
         
-        // Remove all data before insert again
+        // Junction table model
+        $junctionModel = new ArticleBlogCategoryModel();
+        
+        $modelCats = new BlogCategoryModel();
+        $modelCats->truncate(); // Delete all records
+        
         $modelArticles = new ArticleModel();
-        $modelArticles->purgeDeleted();
+        $modelArticles->truncate(); // Delete all records
+        
+        $this->db->enableForeignKeyChecks();
         
         // Insert categories
         $fabricator = new Fabricator($modelCats::class);
@@ -29,8 +35,12 @@ class Installer extends Seeder
         
         
         // Fill junction table
-        foreach ($categoriesArray as $index => $cat) {
-            dd($cat);
+        foreach ($categoriesArray as $index => $cat)
+        {
+            $junctionModel->insert([
+                'article_id' => $articlesArray[$index]->article_id,
+                'bloc_category_id' => $cat->blog_category_id
+            ]);
         }
     }
 }
