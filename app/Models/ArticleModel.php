@@ -45,13 +45,13 @@ class ArticleModel extends Model
     
     public function fake(Generator &$faker)
     {
-        $title = $faker->words(rand(2,5), true);
+        $title = $faker->words(rand(2,4), true);
         $url = url_title(strtolower($title));
         return [    
             'article_title' => $title,
             'article_url' => $url,
             'article_thumbnail' => 'https://picsum.photos/id/'.rand(55, 400).'/550/350',
-            'article_description' => $faker->text(50),
+            'article_description' => $faker->text(180),
             'article_body' => $faker->paragraphs(5, true)
         ];
     }
