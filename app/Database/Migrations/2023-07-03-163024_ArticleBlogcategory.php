@@ -22,7 +22,7 @@ class ArticleBlogcategory extends Migration
                 'constraint' => 5,
                 'unsigned' => true
             ],
-            'bloc_category_id' => [
+            'blog_category_id' => [
                 'type' => 'INT',
                 'constraint' => 5,
                 'unsigned' => true

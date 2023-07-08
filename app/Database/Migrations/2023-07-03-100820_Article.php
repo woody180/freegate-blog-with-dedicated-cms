@@ -31,6 +31,11 @@ class Article extends Migration
                 'constraint' => 255,
 				'null' => true
             ],
+            'article_banner' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => true
+            ],  
             'article_description' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
@@ -40,7 +45,7 @@ class Article extends Migration
                 'type' => 'LONGTEXT',
                 'null' => true
             ],
-            'article_putlished' => [
+            'article_published' => [
                 'type' => 'INT',
 				'constraint' => 1,
 				'default' => 1
