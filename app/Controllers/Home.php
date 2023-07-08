@@ -9,7 +9,7 @@ class Home extends BaseController
         $model = new \App\Models\ArticleModel();
         
         return view('home', [
-            'articles' => $model->paginate(2),
+            'articles' => $model->paginate(1),
             'pager' => $model->pager->getPageCount() > 1 ? $model->pager->links() : NULL
         ]);
     }
