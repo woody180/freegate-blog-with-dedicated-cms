@@ -22,13 +22,16 @@ class Installer extends Seeder
         
         $modelArticles = new ArticleModel();
         $modelArticles->truncate(); // Delete all records
+
+        $articleBlogCategoryModel = new ArticleBlogCategoryModel();
+        $articleBlogCategoryModel->truncate(); // Delete all records
         
         $this->db->enableForeignKeyChecks();
         
         // Insert categories
         $fabricator = new Fabricator($modelCats::class);
         $categoriesArray = $fabricator->create(10);
-        
+               
         // Insert articles
         $fabricator = new Fabricator($modelArticles::class);
         $articlesArray = $fabricator->create(10);
