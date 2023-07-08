@@ -55,4 +55,58 @@ class ArticleModel extends Model
             'article_body' => $faker->paragraphs(5, true)
         ];
     }
+    
+    
+    
+    public function getAll(int $perPage = 20)
+    {
+        return 
+        $this->select('
+            article.article_title,
+            article.article_url,
+            article.article_thumbnail,
+            article.article_description,
+            article.created_at,
+            GROUP_CONCAT(b.blog_category_id) as blog_category_id,
+            GROUP_CONCAT(b.blog_category_url) as blog_category_url,
+            GROUP_CONCAT(b.blog_category_title) as blog_category_title 
+        ')
+        ->join('article_blog_category_junction c', 'article.article_id=c.article_id')
+        ->join('blogcategory b', 'b.blog_category_id=c.bloc_category_id')
+        ->groupBy('
+            article.article_title,
+            article.article_url,
+            article.article_thumbnail,
+            article.article_description,
+            article.created_at
+        ')->paginate();
+    }
+    
+    
+    
+    
+    public function getWhere(string $where, int $perPage = 20)
+    {
+        return 
+        $this->select('
+            article.article_title,
+            article.article_url,
+            article.article_thumbnail,
+            article.article_description,
+            article.created_at,
+            GROUP_CONCAT(b.blog_category_id) as blog_category_id,
+            GROUP_CONCAT(b.blog_category_url) as blog_category_url,
+            GROUP_CONCAT(b.blog_category_title) as blog_category_title 
+        ')
+        ->join('article_blog_category_junction c', 'article.article_id=c.article_id')
+        ->join('blogcategory b', 'b.blog_category_id=c.bloc_category_id')
+        ->where('blog_category_url', $where)
+        ->groupBy('
+            article.article_title,
+            article.article_url,
+            article.article_thumbnail,
+            article.article_description,
+            article.created_at
+        ')->paginate($perPage);
+    }
 }
