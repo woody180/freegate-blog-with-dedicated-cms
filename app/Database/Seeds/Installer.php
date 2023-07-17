@@ -42,7 +42,7 @@ class Installer extends Seeder
         {
             $junctionModel->insert([
                 'article_id' => $articlesArray[$index]->article_id,
-                'bloc_category_id' => $cat->blog_category_id
+                'blog_category_id' => $cat->blog_category_id
             ]);
         }
     }
