@@ -15,7 +15,7 @@ class ArticleModel extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['article_title', 'article_url', 'article_thumbnail', 'article_description', 'article_body', 'created_at', 'updated_at'];
+    protected $allowedFields    = ['article_title', 'article_url', 'article_thumbnail', 'article_banner', 'article_description', 'article_body', 'created_at', 'updated_at'];
 
     // Dates
     protected $useTimestamps = true;
@@ -51,6 +51,7 @@ class ArticleModel extends Model
             'article_title' => $title,
             'article_url' => $url,
             'article_thumbnail' => 'https://picsum.photos/id/'.rand(55, 400).'/550/350',
+            'article_banner' => 'https://picsum.photos/id/'.rand(55, 400).'/1920/850',
             'article_description' => $faker->text(180),
             'article_body' => $faker->paragraphs(5, true)
         ];
@@ -65,48 +66,90 @@ class ArticleModel extends Model
             article.article_title,
             article.article_url,
             article.article_thumbnail,
+            article.article_banner,
             article.article_description,
+            article.article_published, 
             article.created_at,
             GROUP_CONCAT(b.blog_category_id) as blog_category_id,
             GROUP_CONCAT(b.blog_category_url) as blog_category_url,
             GROUP_CONCAT(b.blog_category_title) as blog_category_title 
         ')
-        ->join('article_blog_category_junction c', 'article.article_id=c.article_id')
-        ->join('blogcategory b', 'b.blog_category_id=c.bloc_category_id')
+        ->join('article_blog_category_junction c', 'article.article_id = c.article_id')
+        ->join('blogcategory b', 'b.blog_category_id = c.blog_category_id')
+        ->where('article.article_published', 1)
         ->groupBy('
             article.article_title,
             article.article_url,
             article.article_thumbnail,
+            article.article_banner,
             article.article_description,
+            article.article_published, 
             article.created_at
-        ')->paginate();
+        ')->paginate($perPage);
     }
     
     
     
     
-    public function getWhere(string $where, int $perPage = 20)
+    public function getWhere(string $blog_url, int $perPage = 20)
     {
         return 
         $this->select('
             article.article_title,
             article.article_url,
             article.article_thumbnail,
+            article.article_banner,
             article.article_description,
+            article.article_published, 
             article.created_at,
             GROUP_CONCAT(b.blog_category_id) as blog_category_id,
             GROUP_CONCAT(b.blog_category_url) as blog_category_url,
             GROUP_CONCAT(b.blog_category_title) as blog_category_title 
         ')
-        ->join('article_blog_category_junction c', 'article.article_id=c.article_id')
-        ->join('blogcategory b', 'b.blog_category_id=c.bloc_category_id')
-        ->where('blog_category_url', $where)
+        ->join('article_blog_category_junction c', 'article.article_id = c.article_id')
+        ->join('blogcategory b', 'b.blog_category_id = c.blog_category_id')
+        ->where('article.article_published', '1')
+        ->where('blog_category_url', $blog_url)
         ->groupBy('
             article.article_title,
             article.article_url,
             article.article_thumbnail,
+            article.article_banner,
             article.article_description,
+            article.article_published, 
             article.created_at
         ')->paginate($perPage);
+    }
+    
+    
+    
+    // Featured articles
+    public function featured()
+    {
+        return $this->select('
+                article.article_title,
+                article.article_url,
+                article.article_thumbnail,
+                article.article_banner,
+                article.article_description,
+                article.article_published, 
+                article.created_at,
+                GROUP_CONCAT(b.blog_category_id) as blog_category_id,
+                GROUP_CONCAT(b.blog_category_url) as blog_category_url,
+                GROUP_CONCAT(b.blog_category_title) as blog_category_title 
+            ')
+            ->join('article_blog_category_junction c', 'article.article_id = c.article_id')
+            ->join('blogcategory b', 'b.blog_category_id = c.blog_category_id')
+            ->where('article.article_published', '1')
+            ->where('article_featured', 1)
+            ->groupBy('
+                article.article_title,
+                article.article_url,
+                article.article_thumbnail,
+                article.article_banner,
+                article.article_description,
+                article.article_published, 
+                article.created_at
+            ')->get()->getResultObject();
     }
 }
