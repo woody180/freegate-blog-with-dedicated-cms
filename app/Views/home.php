@@ -2,7 +2,7 @@
 
 
 <?= $this->section('featured') ?>
-    <?= $this->include('includes/featured_slider') ?>
+    <?= view('includes/featured_slider', ['featured' => $featured]) ?>
 <?= $this->endSection() ?>
 
 
