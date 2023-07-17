@@ -32,7 +32,7 @@ class ArticleBlogcategory extends Migration
         $this->forge->addKey('ab_id', true);
         
         $this->forge->addForeignKey('article_id', 'article', 'article_id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('bloc_category_id', 'blogcategory', 'blog_category_id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('blog_category_id', 'blogcategory', 'blog_category_id', 'CASCADE', 'CASCADE');
         
         $this->forge->createTable('article_blog_category_junction');
         
