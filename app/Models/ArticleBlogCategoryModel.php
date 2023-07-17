@@ -13,7 +13,7 @@ class ArticleBlogCategoryModel extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['article_id', 'bloc_category_id'];
+    protected $allowedFields    = ['article_id', 'blog_category_id'];
 
     // Dates
     protected $useTimestamps = false;
