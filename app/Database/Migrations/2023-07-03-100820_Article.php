@@ -55,6 +55,11 @@ class Article extends Migration
 				'constraint' => 1,
 				'default' => 0
             ],
+            'article_ordering' => [
+                'type' => 'INT',
+                'constraint' => 12,
+                'default' => 1
+            ],
             'article_meta_keywords' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
