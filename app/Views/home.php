@@ -1,10 +1,10 @@
 <?= $this->extend('layoutes/default') ?>
 
-
+<?php if (!empty($featured)): ?>
 <?= $this->section('featured') ?>
     <?= view('includes/featured_slider', ['featured' => $featured]) ?>
 <?= $this->endSection() ?>
-
+<?php endif; ?>
 
 
 <?= $this->section('content') ?>
