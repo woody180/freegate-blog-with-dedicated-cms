@@ -2,7 +2,7 @@
 
     <div class="uk-flex uk-flex-center uk-padding uk-padding-remove-left uk-padding-remove-right" id="header-logo">
         <a href="/" class="uk-display-block uk-width-1-6@m uk-width-1-4@s uk-width-1-3">
-            <img class="uk-display-block uk-width-1-1" src="./images/logo/logo.png" alt="">
+            <img class="uk-display-block uk-width-1-1" src="<?= base_url("images/logo/logo.png") ?>" alt="">
         </a>
     </div>
 
