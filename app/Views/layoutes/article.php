@@ -15,17 +15,17 @@
         </div> -->
 
         <div class="cover-image uk-height-large">
-            <img src="https://picsum.photos/1920/1200" alt="">
+            <?= $this->renderSection('banner') ?>
         </div>
 
 
         <h1 class="title"><?= $title ?? '' ?></h1>
         <div class="uk-text-muted uk-text-italic">Author: <a href="#" class="uk-text-muted">Woody Woodpecker</a></div>
-        <div class="uk-text-muted uk-text-italic">Published: 07.02.2023</div>
+        <div class="uk-text-muted uk-text-italic">Published: <?= date('M.d.Y', strtotime($article->created_at)) ?></div>
         <hr class="uk-divider-small">
 
         
-        <?= $this->section('content') ?>
+        <?= $this->renderSection('content') ?>
 
 
         <div class="socials uk-flex uk-flex-right uk-margin-large-top">
