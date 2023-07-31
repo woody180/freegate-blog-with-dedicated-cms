@@ -56,6 +56,19 @@ class ArticleModel extends Model
             'article_body' => $faker->paragraphs(5, true)
         ];
     }
+
+
+
+    public function getArticle(string $url)
+    {
+        return 
+        $this
+        ->join('article_blog_category_junction c', 'article.article_id = c.article_id')
+        ->join('blogcategory b', 'b.blog_category_id = c.blog_category_id')
+        ->where('article.article_published', 1)
+        ->where('article.article_url', $url)
+        ->first();
+    }
     
     
     
