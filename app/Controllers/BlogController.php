@@ -23,6 +23,13 @@ class BlogController extends BaseController
     // Show article
     public function article(string $blog_url, string $article_url)
     {
-        echo 'Show article content: ' . $blog_url . ' - ' . $article_url;
+        $articleModel = new \App\Models\ArticleModel();
+        $article = $articleModel->getArticle($article_url) ?? throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
+        return view('article', [
+            'title' => ucfirst($article->article_title),
+            'description' => $article->article_description,
+            'article' => $article
+        ]);
     }
 }
