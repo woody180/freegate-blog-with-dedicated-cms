@@ -8,8 +8,6 @@ class Navigation extends Migration
 {
     public function up()
     {
-        $this->forge->createDatabase('freegate', true);
-        
         $this->db->disableForeignKeyChecks();
         
         $this->forge->addField([
