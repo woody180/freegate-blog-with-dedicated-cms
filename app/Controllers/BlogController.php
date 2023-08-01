@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use stdClass;
 
 class BlogController extends BaseController
 {
@@ -24,12 +25,24 @@ class BlogController extends BaseController
     public function article(string $blog_url, string $article_url)
     {
         $articleModel = new \App\Models\ArticleModel();
-        $article = $articleModel->getArticle($article_url) ?? throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        $article = $articleModel->getArticle($article_url);
+        
+        if (is_null($article->article_id)) throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
+        $categoryIds = explode(',',$article->blog_category_id);
+        $categoryTitles = explode(',',$article->blog_category_title);
+        $categoryUrls = explode(',',$article->blog_category_url);
+        
+        $obj = new stdClass();
+        $obj->titles = $categoryTitles;
+        $obj->urls = $categoryUrls;
+        $obj->ids = $categoryIds;
 
         return view('article', [
             'title' => ucfirst($article->article_title),
             'description' => $article->article_description,
-            'article' => $article
+            'article' => $article,
+            'category' => $obj
         ]);
     }
 }
