@@ -63,6 +63,12 @@ class ArticleModel extends Model
     {
         return 
         $this
+        ->select('
+            article.*, 
+            GROUP_CONCAT(b.blog_category_id) as blog_category_id,
+            GROUP_CONCAT(b.blog_category_url) as blog_category_url,
+            GROUP_CONCAT(b.blog_category_title) as blog_category_title 
+        ')
         ->join('article_blog_category_junction c', 'article.article_id = c.article_id')
         ->join('blogcategory b', 'b.blog_category_id = c.blog_category_id')
         ->where('article.article_published', 1)
