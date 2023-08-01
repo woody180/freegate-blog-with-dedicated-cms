@@ -114,40 +114,12 @@
     <label for="">Categories</label>
 
     <ul class="uk-list uk-list-divider">
+        <?php foreach (model(App\Models\BlogCategoryModel::class, true)->list() as $cat): ?>
         <li class="uk-flex uk-flex-between uk-flex-middle">
-            <a class="uk-link-reset uk-text-italic uk-text-meta" href="#">Travel</a>
+            <a class="uk-link-reset uk-text-italic uk-text-meta" href="<?= base_url("blog") . "/" . $cat->blog_category_url ?>"><?= $cat->blog_category_title ?></a>
 
             <span class="uk-badge">10</span>
         </li>
-        <li class="uk-flex uk-flex-between uk-flex-middle">
-            <a class="uk-link-reset uk-text-italic uk-text-meta" href="#">Technology</a>
-
-            <span class="uk-badge">10</span>
-        </li>
-        <li class="uk-flex uk-flex-between uk-flex-middle">
-            <a class="uk-link-reset uk-text-italic uk-text-meta" href="#">Adventures</a>
-
-            <span class="uk-badge">10</span>
-        </li>
-        <li class="uk-flex uk-flex-between uk-flex-middle">
-            <a class="uk-link-reset uk-text-italic uk-text-meta" href="#">Music</a>
-
-            <span class="uk-badge">10</span>
-        </li>
-        <li class="uk-flex uk-flex-between uk-flex-middle">
-            <a class="uk-link-reset uk-text-italic uk-text-meta" href="#">Movies</a>
-
-            <span class="uk-badge">10</span>
-        </li>
-        <li class="uk-flex uk-flex-between uk-flex-middle">
-            <a class="uk-link-reset uk-text-italic uk-text-meta" href="#">Photography</a>
-
-            <span class="uk-badge">10</span>
-        </li>
-        <li class="uk-flex uk-flex-between uk-flex-middle">
-            <a class="uk-link-reset uk-text-italic uk-text-meta" href="#">Books</a>
-
-            <span class="uk-badge">10</span>
-        </li>
+        <?php endforeach; ?>
     </ul>                           
 </div>
