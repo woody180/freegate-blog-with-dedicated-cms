@@ -62,7 +62,7 @@ class BlogCategoryModel extends Model
     public function list()
     {
         return $this
-            ->select('blog_category_id, blog_category_title, blog_category_title')
+            ->select('blog_category_id, blog_category_title, blog_category_url')
             ->findAll();
     }
 
