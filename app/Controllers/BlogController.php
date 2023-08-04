@@ -17,7 +17,11 @@ class BlogController extends BaseController
     // Show blog by category
     public function category(string $url)
     {
-        echo 'List articles by category: ' . $url;
+        echo 'List of articles by category: ' . $url;
+
+        $model = new \App\Models\ArticleModel();
+        $data = $model->getWhere($url);
+        dd($data);
     }
     
     
