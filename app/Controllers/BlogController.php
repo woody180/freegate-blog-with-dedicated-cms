@@ -17,11 +17,16 @@ class BlogController extends BaseController
     // Show blog by category
     public function category(string $url)
     {
-        echo 'List of articles by category: ' . $url;
-
         $model = new \App\Models\ArticleModel();
         $data = $model->getWhere($url);
-        dd($data);
+        
+        if (empty($data)) 
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        
+
+        return view('blog', [
+            'articles' => $data
+        ]);
     }
     
     
