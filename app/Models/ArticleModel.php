@@ -171,4 +171,23 @@ class ArticleModel extends Model
                 article.created_at
             ')->get()->getResultObject();
     }
+    
+    
+    
+    public function related()
+    {
+        $categoryID = $this
+            ->select('blogcategory.blog_category_id')
+            ->join('blogcategory', 'article.article_id = blogcategory.blog_category_id')
+            ->first();
+        
+        
+        return $this
+            ->select('article.article_title, article.article_url, article.article_description, article.article_thumbnail, blogcategory.blog_category_url, article.article_published, article.created_at')
+            ->join('blogcategory', 'blogcategory.blog_category_id = article.article_id')
+            ->where('article.article_published', 1)
+            ->where('blogcategory.blog_category_id', $categoryID->blog_category_id)
+            ->limit(4)
+            ->findAll();
+    }
 }
