@@ -51,7 +51,8 @@ class BlogController extends BaseController
             'title' => ucfirst($article->article_title),
             'description' => $article->article_description,
             'article' => $article,
-            'category' => $obj
+            'category' => $obj,
+            'related' => $articleModel->related()
         ]);
     }
 }
