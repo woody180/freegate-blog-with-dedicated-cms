@@ -22,9 +22,6 @@ class BlogController extends BaseController
         
         if (empty($data)) 
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-
-
-        //dd($model->pager->getPageCount());
         
 
         return view('blog', [

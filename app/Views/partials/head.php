@@ -6,7 +6,7 @@
     <meta name="description" content="<?= $description ?? '' ?>">
     
     <?= link_tag('css/uikit.min.css') ?>
-    <?= link_tag('css/bootstrap.css') ?>
+    <?= link_tag('css/bootstrap.min.css') ?>
     <?= script_tag('js/uikit.min.js'); ?>
     <?= script_tag('js/uikit-icons.min.js'); ?>
     

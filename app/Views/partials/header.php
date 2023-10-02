@@ -7,7 +7,7 @@
     </div>
 
     <div id="header-navs" class="uk-background-default" uk-sticky>
-        <div class="uk-container">
+        <div class="uk-container uk-position-relative">
             <div id="header-nav-wrapper" class="uk-position-relative">
                 <div class="uk-position-center-left">
                     <div class="uk-flex uk-flex-middle uk-padding-small uk-padding-remove-top uk-padding-remove-bottom uk-padding-remove-left">
@@ -54,20 +54,18 @@
                     <div class="uk-flex uk-flex-right uk-flex-middle uk-padding-small uk-padding-remove-top uk-padding-remove-bottom uk-padding-remove-right">
                         <div class="uk-flex uk-flex-middle">
                             <a uk-toggle="target: #offcanvas-overlay" href="#" uk-icon="icon: menu" class="uk-margin-right uk-hidden@m"></a>
-                            <a class="uk-navbar-toggle" href="#modal-full" uk-icon="icon: search" uk-toggle></a>
+                            <a class="uk-navbar-toggle" href="#search-line-full" uk-icon="icon: search" uk-toggle="target: #search-line-full; cls: active;"></a>
                         </div>
                     </div>
                 </div>
             </div>
 
 
-            <div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
-                <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
-                    <button class="uk-modal-close-full" type="button" uk-close></button>
-                    <form class="uk-search uk-search-large">
-                        <input name="search" class="uk-search-input uk-text-center" type="search" placeholder="Search" aria-label="Search" autofocus>
-                    </form>
-                </div>
+            <div id="search-line-full" class="uk-overflow-hidden">
+                <form class="uk-search uk-search-default" method="GET">
+                    <a id="close-main-search" href="#" class="uk-search-icon-flip" uk-icon="icon: close"></a>
+                    <input name="search" class="uk-search-input" type="search" placeholder="Search" aria-label="Search" autofocus>
+                </form>
             </div>
 
         </div>

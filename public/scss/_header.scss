@@ -49,4 +49,52 @@
             }
         }
     }
+
+
+
+    // Search
+    #search-line-full {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 0%;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .2s ease;
+
+        form {
+            background-color: white;
+            z-index: 9;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+
+            .uk-search-input {
+                height: 100%;
+                border: none;
+            }
+        }
+
+
+        &.active {
+            height: 100%;
+            visibility: visible;
+            opacity: 1;
+
+            form {
+                background-color: #f7f7f7;
+            }
+        }
+
+        // Search close button
+        #close-main-search {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 20px;
+        }
+    }
 }

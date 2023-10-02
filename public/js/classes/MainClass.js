@@ -1,38 +1,54 @@
-export default class MainClass {
+import SketchEngine from '../SketchEngine.js';
+
+export default class MainClass extends SketchEngine {
+
     constructor() {
-        this.elements();
-        this.variables();
-
-
-        this.onScroll();
+        super();
     }
+    
+
+    variables = {};
 
 
-    elements(element) {
-        const obj = {};
-        obj.mainHeader = document.querySelector('#main-header');
-        obj.socials = document.querySelector('#floating-share');
-        
-        return obj[element];
-    }
+    execute = [];
 
 
-    variables() {
-        this.variables.headerHeight = this.elements('mainHeader').offsetHeight;
-    }
+    selectors = {
+        searchContainer: '#search-line-full',
+        searchClose: '#close-main-search'
+    };
 
 
+    html = {}
 
-    onScroll() {
 
-        if (!this.elements('socials')) return false;
+    catchDOM() {}
 
-        window.addEventListener('scroll', e => {
-            if (window.scrollY >= this.variables.headerHeight) {
-                this.elements('socials').classList.add('fixed');
-            } else {
-                this.elements('socials').classList.remove('fixed');
-            }
+
+    bindEvents() {
+        UIkit.util.on(this.selectors.searchContainer, 'shown', e => {
+            setTimeout(() => {
+                e.target.parentElement.querySelector('input').focus()
+            }, 100);
         });
+
+        this.lib('body').on('keydown', this.functions.closeSearch.bind(this));
+        this.lib(this.selectors.searchClose).on('click', this.functions.searchClose.bind(this));
+    }
+
+
+    functions = {
+        closeSearch(e) {
+            if (e.keyCode === 27) {
+                if (document.querySelector(this.selectors.searchContainer).className.includes('active')) {
+                    document.querySelector(this.selectors.searchContainer).classList.remove('active');
+                }
+            }
+        },
+
+        searchClose(e) {
+            e.preventDefault();
+            document.querySelector(this.selectors.searchContainer).classList.remove('active');
+        }
     }
 }
