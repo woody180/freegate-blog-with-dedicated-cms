@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Settings extends Migration
+class GlobalSettings extends Migration
 {
     public function up()
     {
@@ -47,11 +47,11 @@ class Settings extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->createTable('settings');
+        $this->forge->createTable('global_settings');
     }
 
     public function down()
     {
-        $this->forge->dropTable('settings');
+        $this->forge->dropTable('global_settings');
     }
 }
